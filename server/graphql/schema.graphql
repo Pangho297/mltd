@@ -1,0 +1,16 @@
+type Query {
+  eventPoint: Event!
+  highScore: Event!
+  loungePoint: Event!
+}
+
+type Event {
+  scores: [Score]
+  summaryTime: String
+  count: Int
+}
+
+type Score {
+  rank: Int
+  score: Float
+}

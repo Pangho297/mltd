@@ -1,6 +1,6 @@
 type Query {
   eventid: Int!
-  data(id: Int!): Rank
+  data(id: Int!, rank: Int!): Rank
 }
 
 type Rank {

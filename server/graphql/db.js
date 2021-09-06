@@ -11,17 +11,17 @@ export const getEventId = async () => {
   return getId;
 };
 
-export const getEventPoint = async (id) => {
-  const ranks = [1, 2, 3, 100, 2500, 5000, 10000, 50000, 10000].join(',');
+export const getEventPoint = async (id, rank) => {
   const HOUR = 60 * 60 * 1500;
   const DATE = new Date(Date.now() - HOUR).toUTCString();
 
   const {
     data: [data],
-  } = await axios(`${API_URL}events/${id}/rankings/logs/eventPoint/${ranks}`, {
+  } = await axios(`${API_URL}events/${id}/rankings/logs/eventPoint/${rank}`, {
     params: {
       timeMin: DATE,
     },
   });
+  console.log(data);
   return data;
 };

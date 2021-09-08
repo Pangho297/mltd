@@ -24,17 +24,17 @@ const GET_EVENT_POINT = gql`
 function Main() {
   const id = useQuery<EventType>(GET_EVENTID).data?.eventid;
   const { data } = useQuery<RankingType>(GET_EVENT_POINT, {
-    variables: { id, rank: 100 },
+    variables: { id, rank: 2500 },
   });
 
-  console.log(data?.data?.rank, data?.data?.data);
+  console.log(data?.data?.data[0].score);
 
   return (
     <S.Container>
       <div>{data?.data?.rank}</div>
       <div>
         {data?.data?.data.map((el) => (
-          <div>{el.score}</div>
+          <div key={el.score}>{el.score}</div>
         ))}
       </div>
     </S.Container>

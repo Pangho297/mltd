@@ -1,42 +1,29 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import * as S from './style';
-import { EventType, RankingType } from './type';
-
-const GET_EVENTID = gql`
-  query {
-    eventid
-  }
-`;
-
-const GET_EVENT_POINT = gql`
-  query data($id: Int!, $rank: Int!) {
-    data(id: $id, rank: $rank) {
-      rank
-      data {
-        score
-        summaryTime
-      }
-    }
-  }
-`;
+import { EventType, BorderType } from './type';
+import { GET_EVENT, GET_EVENT_BORDER } from './query';
 
 function Main() {
-  const id = useQuery<EventType>(GET_EVENTID).data?.eventid;
-  const { data } = useQuery<RankingType>(GET_EVENT_POINT, {
-    variables: { id, rank: 2500 },
+  const event = useQuery<EventType>(GET_EVENT).data?.event;
+  const { data } = useQuery<BorderType>(GET_EVENT_BORDER, {
+    variables: { id: event?.id, rank: 2500 },
   });
-
-  console.log(data?.data?.data[0].score);
+  const resData = data?.data?.data;
 
   return (
     <S.Container>
-      <div>{data?.data?.rank}</div>
-      <div>
-        {data?.data?.data.map((el) => (
-          <div key={el.score}>{el.score}</div>
-        ))}
-      </div>
+      {data && (
+        <>
+          {resData?.length !== 0 && <div>{data?.data?.rank}</div>}
+          <div>
+            {resData?.map((el) => (
+              <div key={el.score}>{el.score}</div>
+            ))}
+          </div>
+        </>
+      )}
+      <div>PST 이벤트 기간이 아닙니다.</div>
     </S.Container>
   );
 }

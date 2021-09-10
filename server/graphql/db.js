@@ -2,13 +2,11 @@ import axios from 'axios';
 
 const API_URL = 'https://api.matsurihi.me/mltd/v1/';
 
-export const getEventId = async () => {
-  const { data: data } = await axios(`${API_URL}events`, {
-    params: { type: ['theater', 'tour', 'twinstage', 'tune', 'tale'] },
-  });
-  const getId = data.splice(-1)[0].id;
+export const getEventInfo = async () => {
+  const { data: data } = await axios.get(`${API_URL}events`);
+  const currentEvent = data.splice(-1)[0];
 
-  return getId;
+  return currentEvent;
 };
 
 export const getEventPoint = async (id, rank) => {
@@ -17,11 +15,14 @@ export const getEventPoint = async (id, rank) => {
 
   const {
     data: [data],
-  } = await axios(`${API_URL}events/${id}/rankings/logs/eventPoint/${rank}`, {
-    params: {
-      timeMin: DATE,
-    },
-  });
+  } = await axios.get(
+    `${API_URL}events/${id}/rankings/logs/eventPoint/${rank}`,
+    {
+      params: {
+        timeMin: DATE,
+      },
+    }
+  );
   console.log(data);
   return data;
 };

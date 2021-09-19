@@ -21,7 +21,7 @@ function Main() {
   return (
     <S.Container>
       {data?.data ? (
-        <div>
+        <S.Table>
           <TableHeader />
           <TopPlatinum rank={100} />
           <Platinum rank={2500} />
@@ -29,7 +29,7 @@ function Main() {
           <Silver rank={10000} />
           <Bronze rank={25000} />
           <UnRank rank={50000} />
-        </div>
+        </S.Table>
       ) : (
         <div>PST 이벤트 기간이 아닙니다.</div>
       )}

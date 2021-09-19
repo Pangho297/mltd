@@ -10,8 +10,8 @@ export const getEventInfo = async () => {
 };
 
 export const getEventPoint = async (id, rank) => {
-  const HOUR = 60 * 60 * 1500;
-  const DATE = new Date(Date.now() - HOUR).toUTCString();
+  const DAY = 60 * 60 * 1500 * 24;
+  const DATE = new Date(Date.now() - DAY).toUTCString();
 
   const {
     data: [data],

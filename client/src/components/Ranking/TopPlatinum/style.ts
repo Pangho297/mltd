@@ -20,4 +20,7 @@ export const ExpectContainer = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: 700;
+  div:nth-child(2) {
+    color: #ea5b76;
+  }
 `;

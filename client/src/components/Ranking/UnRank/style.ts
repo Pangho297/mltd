@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  background-color: #d9d9db;
   p {
     width: 90px;
     height: 60px;
@@ -20,4 +21,7 @@ export const ExpectContainer = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: 700;
+  div:nth-child(2) {
+    color: #ea5b76;
+  }
 `;

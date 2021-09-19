@@ -1,19 +1,18 @@
 import { useQuery } from '@apollo/client';
 
 import * as S from './style';
-import { GET_EVENT, GET_EVENT_BORDER } from 'query';
-import { EventType, BorderType } from 'types/eventType';
+import { GET_EVENT_BORDER } from 'query';
+import { BorderType } from 'types/eventType';
 import { RankProps } from 'types/rankProps';
 
-const Silver = ({ rank }: RankProps) => {
-  const event = useQuery<EventType>(GET_EVENT).data?.event;
+const TopPlatinum = ({ rank, eventId }: RankProps) => {
   const { data } = useQuery<BorderType>(GET_EVENT_BORDER, {
-    variables: { id: event?.id, rank: rank },
+    variables: { id: eventId, rank: rank },
   });
   const resData = data?.data.data;
   const currentScore = resData?.slice(-1).map((el) => el.score)[0];
-  const before30m = resData?.slice(42, 43).map((el) => el.score)[0];
-  const before1h = resData?.slice(41, 42).map((el) => el.score)[0];
+  const before30m = resData?.slice(-2).map((el) => el.score)[0];
+  const before1h = resData?.slice(-3).map((el) => el.score)[0];
   const before24h = resData?.slice(0, 1).map((el) => el.score)[0];
 
   const expectScore = (score: number | undefined) => {
@@ -32,8 +31,8 @@ const Silver = ({ rank }: RankProps) => {
     <S.Container>
       {resData?.length !== 0 && <p>{data?.data?.rank}</p>}
       {resData?.map((el) => <p key={el.score}>{el.score}</p>).slice(0, 1)}
-      {resData?.map((el) => <p key={el.score}>{el.score}</p>).slice(41, 42)}
-      {resData?.map((el) => <p key={el.score}>{el.score}</p>).slice(42, 43)}
+      {resData?.map((el) => <p key={el.score}>{el.score}</p>).slice(-3)[0]}
+      {resData?.map((el) => <p key={el.score}>{el.score}</p>).slice(-2)[0]}
       {resData?.map((el) => <p key={el.score}>{el.score}</p>).slice(-1)}
       <S.ExpectContainer>
         <div>{expectScore(before30m)}</div>
@@ -51,4 +50,4 @@ const Silver = ({ rank }: RankProps) => {
   );
 };
 
-export default Silver;
+export default TopPlatinum;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  font-family: 'NEXON Lv2 Gohtic';
   background-color: #d9d9db;
   p {
     width: 90px;

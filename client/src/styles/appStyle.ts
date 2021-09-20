@@ -15,7 +15,6 @@ export const BorderBtn = styled.button`
   width: 360px;
   height: 50px;
   border: none;
-  font-family: 'NEXON Lv2 Gothic';
   font-size: 16px;
   font-weight: 700;
   color: #ffffff;
@@ -27,10 +26,9 @@ export const CalcBtn = styled.button`
   width: 360px;
   height: 50px;
   border: none;
-  font-family: 'NEXON Lv2 Gothic';
   font-size: 16px;
   font-weight: 700;
-  color: #ffffff;
-  background-color: #ed90ba;
+  color: #0e0e0e;
+  background-color: #ffce01;
   cursor: pointer;
 `;

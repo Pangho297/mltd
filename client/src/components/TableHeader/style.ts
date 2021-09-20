@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'NEXON Lv2 Gothic';
 `;
 
 export const Title = styled.div`

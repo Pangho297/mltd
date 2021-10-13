@@ -1,6 +1,22 @@
 type Query {
-  eventid: Int!
-  data(id: Int!): Rank
+  event: Event
+  data(id: Int!, rank: Int!): Rank
+}
+
+type Event {
+  id: Int
+  name: String
+  type: Int
+  schedule: Schedule
+}
+
+type Schedule {
+  beginDate: String
+  endDate: String
+  pageBeginDate: String
+  pageEndDate: String
+  boostBeginDate: String
+  boostEndDate: String
 }
 
 type Rank {

@@ -1,9 +1,9 @@
-import { getEventId, getEventPoint } from './db';
+import { getEventInfo, getEventPoint } from './db';
 
 const resolvers = {
   Query: {
-    eventid: () => getEventId(),
-    data: (_, { id }) => getEventPoint(id),
+    event: () => getEventInfo(),
+    data: (_, { id, rank }) => getEventPoint(id, rank),
   },
 };
 

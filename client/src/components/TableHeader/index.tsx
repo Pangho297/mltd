@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/client';
+import { useQuery } from "@apollo/client";
 
-import * as S from './style';
-import { GET_EVENT_BORDER } from 'query';
-import BannerImage from 'asset/image/PSTreasure_01.png';
-import { BorderType } from 'types/eventType';
-import { RankProps } from 'types/rankProps';
+import * as S from "./style";
+import { GET_EVENT_BORDER } from "query";
+import BannerImage from "asset/image/PSTour_01.png";
+import { BorderType } from "types/eventType";
+import { RankProps } from "types/rankProps";
 
 const TableHeader = ({ rank, eventId, title }: RankProps) => {
   const { data } = useQuery<BorderType>(GET_EVENT_BORDER, {

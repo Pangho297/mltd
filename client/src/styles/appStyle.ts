@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -17,8 +17,8 @@ export const BorderBtn = styled.button`
   border: none;
   font-size: 16px;
   font-weight: 700;
-  color: #ffffff;
-  background-color: #18206b;
+  color: #0d0d0d;
+  background-color: #ed90ba;
   cursor: pointer;
 `;
 

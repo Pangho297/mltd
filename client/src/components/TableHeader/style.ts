@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'NEXON Lv2 Gothic';
+  font-family: "NEXON Lv2 Gothic";
 `;
 
 export const Title = styled.div`
@@ -16,8 +16,8 @@ export const Title = styled.div`
   align-items: center;
   font-size: 24px;
   font-weight: 700;
-  color: #f2f2f2;
-  background-color: #18206b;
+  color: #0d0d0d;
+  background-color: #ed90ba;
 `;
 
 export const Time = styled.div`
@@ -28,8 +28,8 @@ export const Time = styled.div`
   align-items: center;
   font-size: 14px;
   font-weight: 700;
-  color: #f2f2f2;
-  background-color: #18206b;
+  color: #0d0d0d;
+  background-color: #ed90ba;
 
   div {
     margin-right: 20px;

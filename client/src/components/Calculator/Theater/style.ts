@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   width: 720px;
   display: flex;
   flex-direction: column;
-  font-family: 'NEXON Lv2 Gothic';
+  font-family: "NEXON Lv2 Gothic";
 `;
 
 export const Header = styled.header`
@@ -19,7 +19,7 @@ export const Header = styled.header`
   background-color: #afa690;
 `;
 
-export const Wrapper = styled.form`
+export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   padding-bottom: 30px;

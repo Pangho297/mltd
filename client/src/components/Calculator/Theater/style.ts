@@ -77,6 +77,7 @@ export const CalcBtn = styled.button`
   border: none;
   font-size: 20px;
   font-weight: 700;
+  color: #ffffff;
   background-color: #afa690;
   cursor: pointer;
 `;

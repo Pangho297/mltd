@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+interface MultipleLive {
+  isMultiple: string;
+  position: string;
+}
+
 export const Container = styled.div`
   width: 720px;
   display: flex;
@@ -19,7 +24,7 @@ export const Header = styled.header`
   background-color: #afa690;
 `;
 
-export const Wrapper = styled.form`
+export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   padding-bottom: 30px;
@@ -77,6 +82,69 @@ export const CalcBtn = styled.button`
   border: none;
   font-size: 20px;
   font-weight: 700;
+  color: #ffffff;
   background-color: #afa690;
+  cursor: pointer;
+`;
+
+export const ResultWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex: 1 0 0;
+  margin-top: 30px;
+`;
+
+export const ResultSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const ResultInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const CountWrapper = styled.div`
+  position: relative;
+`;
+
+export const nonMultipleBtn = styled.button<MultipleLive>`
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  bottom: 0px;
+  right: ${({ position }) => position};
+  border: none;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: ${({ isMultiple }) => (isMultiple === '1x' ? '#94886b' : '#afa690')};
+  cursor: pointer;
+`;
+
+export const DoubleBtn = styled.button<MultipleLive>`
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  bottom: 0px;
+  right: ${({ position }) => position};
+  border: none;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: ${({ isMultiple }) => (isMultiple === '2x' ? '#94886b' : '#afa690')};
+  cursor: pointer;
+`;
+
+export const QuadBtn = styled.button<MultipleLive>`
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  bottom: 0px;
+  right: ${({ position }) => position};
+  border: none;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: ${({ isMultiple }) => (isMultiple === '4x' ? '#94886b' : '#afa690')};
   cursor: pointer;
 `;

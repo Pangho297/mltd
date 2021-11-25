@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from "react";
-import * as S from "./style";
+import { ChangeEvent, useState } from 'react';
+import * as S from './style';
 
 interface inputsType {
   stamina: string;
@@ -11,20 +11,29 @@ interface inputsType {
 const Theater = () => {
   // 일반 라이브 횟수
   const [nomalLiveCount, setNomalLiveCount] = useState<number>(0);
+  // 일반 라이브 2x 횟수
+  const [multipleNomalLiveCount, setMultipleNomalLiveCount] = useState<number>(0);
   // 이벤트 라이브 횟수
   const [eventLiveCount, setEventLiveCount] = useState<number>(0);
+  // 이벤트 라이브 2x 횟수
+  const [doubleEventLiveCount, setDoubleEventLiveCount] = useState<number>(0);
+  // 이벤트 라이브 4x 횟수
+  const [quadEventLiveCount, setQuadEventLiveCount] = useState<number>(0);
   // 사용한 쥬엘
   const [usedJewel, setUsedJewel] = useState<number>(0);
   // 최종 이벤트 포인트
   const [resultPt, setResultPt] = useState<number>(0);
   // 유저 입력값 (최대 스테미너, 목표 이벤트 포인트, 현재 이벤트 포인트, 현재 소지 재화)
   const [inputs, setInputs] = useState<inputsType>({
-    stamina: "",
-    goalPt: "",
-    currentPt: "",
-    currentCur: "",
+    stamina: '',
+    goalPt: '',
+    currentPt: '',
+    currentCur: '',
   });
   const { stamina, goalPt, currentPt, currentCur } = inputs;
+
+  const [isNomalLiveMultiple, setIsNomarlLiveMultiple] = useState<string>('1x');
+  const [isEventLiveMultiple, setIsEventLiveMulitple] = useState<string>('1x');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -47,19 +56,19 @@ const Theater = () => {
 
   const handleCalculating = () => {
     if (parseInt(currentPt) > parseInt(goalPt)) {
-      alert("현재 이벤트 포인트가 목표 이벤트 포인트보다 높습니다");
+      alert('현재 이벤트 포인트가 목표 이벤트 포인트보다 높습니다');
       return;
     } else if (!stamina) {
-      alert("최대 스테미너를 설정해주세요");
+      alert('최대 스테미너를 설정해주세요');
       return;
     } else if (!currentPt) {
-      alert("현재 이벤트 포인트를 설정해주세요");
+      alert('현재 이벤트 포인트를 설정해주세요');
       return;
     } else if (!goalPt) {
-      alert("목표 이벤트 포인트를 설정해주세요");
+      alert('목표 이벤트 포인트를 설정해주세요');
       return;
     } else if (!currentCur) {
-      alert("현재 소지 재화를 설정해주세요");
+      alert('현재 소지 재화를 설정해주세요');
       return;
     }
 
@@ -90,15 +99,37 @@ const Theater = () => {
       }
     }
     setNomalLiveCount(nomalLiveCount);
+    setMultipleNomalLiveCount(Math.floor(nomalLiveCount / 2));
     setEventLiveCount(eventLiveCount);
+    setDoubleEventLiveCount(Math.floor(eventLiveCount / 2));
+    setQuadEventLiveCount(Math.floor(eventLiveCount / 4));
     setUsedJewel(usedJewel);
     setResultPt(eventPt);
   };
 
-  console.log(nomalLiveCount, "liveCount");
-  console.log(eventLiveCount, "eventLiveCount");
-  console.log(usedJewel, "usedJewel");
-  console.log(resultPt, "resultPt");
+  const handleNomalLiveMultiple = (multiple: string) => {
+    if (nomalLiveCount === 0) {
+      alert('아직 계산된 라이브 횟수가 없습니다.');
+      return;
+    } else if (multiple === '1x') {
+      setIsNomarlLiveMultiple('1x');
+    } else if (multiple === '2x') {
+      setIsNomarlLiveMultiple('2x');
+    }
+  };
+
+  const handleEventLiveMultiple = (multiple: string) => {
+    if (eventLiveCount === 0) {
+      alert('아직 계산된 라이브 횟수가 없습니다.');
+      return;
+    } else if (multiple === '1x') {
+      setIsEventLiveMulitple('1x');
+    } else if (multiple === '2x') {
+      setIsEventLiveMulitple('2x');
+    } else if (multiple === '4x') {
+      setIsEventLiveMulitple('4x');
+    }
+  };
 
   return (
     <S.Container>
@@ -108,41 +139,21 @@ const Theater = () => {
           <S.InputContainer>
             <S.ContentContainer>
               <div>최대 스테미너</div>
-              <S.Input
-                type="text"
-                name="stamina"
-                value={stamina}
-                onChange={handleChange}
-              />
+              <S.Input type="text" name="stamina" value={stamina} onChange={handleChange} />
             </S.ContentContainer>
             <S.ContentContainer>
               <div>목표 이벤트 포인트</div>
-              <S.Input
-                type="text"
-                name="goalPt"
-                value={goalPt}
-                onChange={handleChange}
-              />
+              <S.Input type="text" name="goalPt" value={goalPt} onChange={handleChange} />
             </S.ContentContainer>
           </S.InputContainer>
           <S.InputContainer>
             <S.ContentContainer>
               <div>현재 이벤트 포인트</div>
-              <S.Input
-                type="text"
-                name="currentPt"
-                value={currentPt}
-                onChange={handleChange}
-              />
+              <S.Input type="text" name="currentPt" value={currentPt} onChange={handleChange} />
             </S.ContentContainer>
             <S.ContentContainer>
               <div>현재 소지 재화</div>
-              <S.Input
-                type="text"
-                name="currentCur"
-                value={currentCur}
-                onChange={handleChange}
-              />
+              <S.Input type="text" name="currentCur" value={currentCur} onChange={handleChange} />
             </S.ContentContainer>
           </S.InputContainer>
         </S.InnerContainer>
@@ -154,11 +165,60 @@ const Theater = () => {
         <S.ResultSection>
           <S.ResultInputWrapper>
             <div>일반 라이브 횟수</div>
-            <S.Input readOnly type="text" value={`${nomalLiveCount}회`} />
+            <S.CountWrapper>
+              <S.Input
+                readOnly
+                type="text"
+                value={`${isNomalLiveMultiple === '1x' ? nomalLiveCount : multipleNomalLiveCount}회`}
+              />
+              <S.nonMultipleBtn
+                isMultiple={isNomalLiveMultiple}
+                onClick={() => handleNomalLiveMultiple('1x')}
+                position="35px"
+              >
+                1x
+              </S.nonMultipleBtn>
+              <S.DoubleBtn
+                isMultiple={isNomalLiveMultiple}
+                onClick={() => handleNomalLiveMultiple('2x')}
+                position="0px"
+              >
+                2x
+              </S.DoubleBtn>
+            </S.CountWrapper>
           </S.ResultInputWrapper>
           <S.ResultInputWrapper>
             <div>이벤트 라이브 횟수</div>
-            <S.Input readOnly type="text" value={`${eventLiveCount}회`} />
+            <S.CountWrapper>
+              <S.Input
+                readOnly
+                type="text"
+                value={`${
+                  isEventLiveMultiple === '1x'
+                    ? eventLiveCount
+                    : isEventLiveMultiple === '2x'
+                    ? doubleEventLiveCount
+                    : quadEventLiveCount
+                }회`}
+              />
+              <S.nonMultipleBtn
+                isMultiple={isEventLiveMultiple}
+                onClick={() => handleEventLiveMultiple('1x')}
+                position="70px"
+              >
+                1x
+              </S.nonMultipleBtn>
+              <S.DoubleBtn
+                isMultiple={isEventLiveMultiple}
+                onClick={() => handleEventLiveMultiple('2x')}
+                position="35px"
+              >
+                2x
+              </S.DoubleBtn>
+              <S.QuadBtn isMultiple={isEventLiveMultiple} onClick={() => handleEventLiveMultiple('4x')} position="0px">
+                4x
+              </S.QuadBtn>
+            </S.CountWrapper>
           </S.ResultInputWrapper>
           <S.ResultInputWrapper>
             <div>최종 이벤트 포인트</div>

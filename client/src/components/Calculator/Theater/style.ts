@@ -1,10 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
+interface MultipleLive {
+  isMultiple: string;
+  position: string;
+}
 
 export const Container = styled.div`
   width: 720px;
   display: flex;
   flex-direction: column;
-  font-family: "NEXON Lv2 Gothic";
+  font-family: 'NEXON Lv2 Gothic';
 `;
 
 export const Header = styled.header`
@@ -99,4 +104,47 @@ export const ResultInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+`;
+
+export const CountWrapper = styled.div`
+  position: relative;
+`;
+
+export const nonMultipleBtn = styled.button<MultipleLive>`
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  bottom: 0px;
+  right: ${({ position }) => position};
+  border: none;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: ${({ isMultiple }) => (isMultiple === '1x' ? '#94886b' : '#afa690')};
+  cursor: pointer;
+`;
+
+export const DoubleBtn = styled.button<MultipleLive>`
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  bottom: 0px;
+  right: ${({ position }) => position};
+  border: none;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: ${({ isMultiple }) => (isMultiple === '2x' ? '#94886b' : '#afa690')};
+  cursor: pointer;
+`;
+
+export const QuadBtn = styled.button<MultipleLive>`
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  bottom: 0px;
+  right: ${({ position }) => position};
+  border: none;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: ${({ isMultiple }) => (isMultiple === '4x' ? '#94886b' : '#afa690')};
+  cursor: pointer;
 `;

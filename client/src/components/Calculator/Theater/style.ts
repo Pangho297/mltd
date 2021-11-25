@@ -81,3 +81,22 @@ export const CalcBtn = styled.button`
   background-color: #afa690;
   cursor: pointer;
 `;
+
+export const ResultWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex: 1 0 0;
+  margin-top: 30px;
+`;
+
+export const ResultSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+export const ResultInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;

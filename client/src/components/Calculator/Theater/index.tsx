@@ -150,20 +150,36 @@ const Theater = () => {
           <p>계산</p>
         </S.CalcBtn>
       </S.Wrapper>
-      <div>
-        <div>일반 라이브 횟수</div>
-        <S.Input readOnly type="text" value={nomalLiveCount} />
-        <div>이벤트 라이브 횟수</div>
-        <S.Input readOnly type="text" value={eventLiveCount} />
-        <div>사용한 스테미너</div>
-        <S.Input readOnly type="text" value={nomalLiveCount * 30} />
-        <div>사용한 재화</div>
-        <S.Input readOnly type="text" value={`${eventLiveCount * 180}개`} />
-        <div>사용한 쥬얼 개수</div>
-        <S.Input readOnly type="text" value={`${usedJewel}개`} />
-        <div>최종 이벤트 포인트</div>
-        <S.Input readOnly type="text" value={`${resultPt}Pt`} />
-      </div>
+      <S.ResultWrapper>
+        <S.ResultSection>
+          <S.ResultInputWrapper>
+            <div>일반 라이브 횟수</div>
+            <S.Input readOnly type="text" value={`${nomalLiveCount}회`} />
+          </S.ResultInputWrapper>
+          <S.ResultInputWrapper>
+            <div>이벤트 라이브 횟수</div>
+            <S.Input readOnly type="text" value={`${eventLiveCount}회`} />
+          </S.ResultInputWrapper>
+          <S.ResultInputWrapper>
+            <div>최종 이벤트 포인트</div>
+            <S.Input readOnly type="text" value={`${resultPt}Pt`} />
+          </S.ResultInputWrapper>
+        </S.ResultSection>
+        <S.ResultSection>
+          <S.ResultInputWrapper>
+            <div>사용한 스테미너</div>
+            <S.Input readOnly type="text" value={nomalLiveCount * 30} />
+          </S.ResultInputWrapper>
+          <S.ResultInputWrapper>
+            <div>사용한 재화</div>
+            <S.Input readOnly type="text" value={`${eventLiveCount * 180}개`} />
+          </S.ResultInputWrapper>
+          <S.ResultInputWrapper>
+            <div>사용한 쥬얼 개수</div>
+            <S.Input readOnly type="text" value={`${usedJewel}개`} />
+          </S.ResultInputWrapper>
+        </S.ResultSection>
+      </S.ResultWrapper>
     </S.Container>
   );
 };

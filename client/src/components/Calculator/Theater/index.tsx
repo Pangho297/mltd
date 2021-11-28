@@ -1,12 +1,7 @@
 import { ChangeEvent, useState } from 'react';
-import * as S from './style';
+import * as S from '../style';
 
-interface inputsType {
-  stamina: string;
-  goalPt: string;
-  currentPt: string;
-  currentCur: string;
-}
+import { inputsType } from 'types/calculatorInputType';
 
 const Theater = () => {
   // 일반 라이브 횟수
@@ -23,17 +18,18 @@ const Theater = () => {
   const [usedJewel, setUsedJewel] = useState<number>(0);
   // 최종 이벤트 포인트
   const [resultPt, setResultPt] = useState<number>(0);
+  // 일반 라이브 배수
+  const [isNomalLiveMultiple, setIsNomarlLiveMultiple] = useState<string>('1x');
+  // 이벤트 라이브 배수
+  const [isEventLiveMultiple, setIsEventLiveMulitple] = useState<string>('1x');
   // 유저 입력값 (최대 스테미너, 목표 이벤트 포인트, 현재 이벤트 포인트, 현재 소지 재화)
   const [inputs, setInputs] = useState<inputsType>({
-    stamina: '',
+    maxStamina: '',
     goalPt: '',
     currentPt: '',
     currentCur: '',
   });
-  const { stamina, goalPt, currentPt, currentCur } = inputs;
-
-  const [isNomalLiveMultiple, setIsNomarlLiveMultiple] = useState<string>('1x');
-  const [isEventLiveMultiple, setIsEventLiveMulitple] = useState<string>('1x');
+  const { maxStamina, goalPt, currentPt, currentCur } = inputs;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -58,7 +54,7 @@ const Theater = () => {
     if (parseInt(currentPt) > parseInt(goalPt)) {
       alert('현재 이벤트 포인트가 목표 이벤트 포인트보다 높습니다');
       return;
-    } else if (!stamina) {
+    } else if (!maxStamina) {
       alert('최대 스테미너를 설정해주세요');
       return;
     } else if (!currentPt) {
@@ -77,22 +73,22 @@ const Theater = () => {
     let usedJewel = 0;
     let eventPt = parseInt(currentPt);
     let eventCurrency = parseInt(currentCur);
-    let maxStamina = parseInt(stamina);
+    let stamina = parseInt(maxStamina);
     const FinalGoalPt = parseInt(goalPt);
 
     while (eventPt < FinalGoalPt) {
-      if (maxStamina >= 30) {
+      if (stamina >= 30 && eventCurrency < 180) {
         eventPt += 85;
         eventCurrency += 85;
-        maxStamina -= 30;
+        stamina -= 30;
         nomalLiveCount++;
       }
-      if (maxStamina < 30) {
+      if (stamina < 30) {
         usedJewel += 50;
-        maxStamina += parseInt(stamina);
+        stamina += parseInt(maxStamina);
       }
 
-      if (eventCurrency > 180) {
+      if (eventCurrency >= 180) {
         eventPt += 537;
         eventCurrency -= 180;
         eventLiveCount++;
@@ -133,45 +129,82 @@ const Theater = () => {
 
   return (
     <S.Container>
-      <S.Header>플레티넘 스타 시어터</S.Header>
+      <S.Header baseColor="#afa690">플레티넘 스타 시어터</S.Header>
       <S.Wrapper>
         <S.InnerContainer>
           <S.InputContainer>
             <S.ContentContainer>
-              <div>최대 스테미너</div>
-              <S.Input type="text" name="stamina" value={stamina} onChange={handleChange} />
+              <S.Title>최대 스테미너</S.Title>
+              <S.Input
+                baseColor="#afa690"
+                darkColor="#94886b"
+                lightColor="#d0cbbe"
+                type="text"
+                name="maxStamina"
+                value={maxStamina}
+                onChange={handleChange}
+              />
             </S.ContentContainer>
             <S.ContentContainer>
-              <div>목표 이벤트 포인트</div>
-              <S.Input type="text" name="goalPt" value={goalPt} onChange={handleChange} />
+              <S.Title>목표 이벤트 포인트</S.Title>
+              <S.Input
+                baseColor="#afa690"
+                darkColor="#94886b"
+                lightColor="#d0cbbe"
+                type="text"
+                name="goalPt"
+                value={goalPt}
+                onChange={handleChange}
+              />
             </S.ContentContainer>
           </S.InputContainer>
           <S.InputContainer>
             <S.ContentContainer>
-              <div>현재 이벤트 포인트</div>
-              <S.Input type="text" name="currentPt" value={currentPt} onChange={handleChange} />
+              <S.Title>현재 이벤트 포인트</S.Title>
+              <S.Input
+                baseColor="#afa690"
+                darkColor="#94886b"
+                lightColor="#d0cbbe"
+                type="text"
+                name="currentPt"
+                value={currentPt}
+                onChange={handleChange}
+              />
             </S.ContentContainer>
             <S.ContentContainer>
-              <div>현재 소지 재화</div>
-              <S.Input type="text" name="currentCur" value={currentCur} onChange={handleChange} />
+              <S.Title>현재 소지 재화</S.Title>
+              <S.Input
+                baseColor="#afa690"
+                darkColor="#94886b"
+                lightColor="#d0cbbe"
+                type="text"
+                name="currentCur"
+                value={currentCur}
+                onChange={handleChange}
+              />
             </S.ContentContainer>
           </S.InputContainer>
         </S.InnerContainer>
-        <S.CalcBtn type="button" onClick={handleCalculating}>
+        <S.CalcBtn baseColor="#afa690" type="button" onClick={handleCalculating}>
           <p>계산</p>
         </S.CalcBtn>
       </S.Wrapper>
       <S.ResultWrapper>
         <S.ResultSection>
           <S.ResultInputWrapper>
-            <div>일반 라이브 횟수</div>
+            <S.Title>일반 라이브 횟수</S.Title>
             <S.CountWrapper>
               <S.Input
+                baseColor="#afa690"
+                darkColor="#94886b"
+                lightColor="#d0cbbe"
                 readOnly
                 type="text"
                 value={`${isNomalLiveMultiple === '1x' ? nomalLiveCount : multipleNomalLiveCount}회`}
               />
               <S.nonMultipleBtn
+                baseColor="#afa690"
+                darkColor="#94886b"
                 isMultiple={isNomalLiveMultiple}
                 onClick={() => handleNomalLiveMultiple('1x')}
                 position="35px"
@@ -179,6 +212,8 @@ const Theater = () => {
                 1x
               </S.nonMultipleBtn>
               <S.DoubleBtn
+                baseColor="#afa690"
+                darkColor="#94886b"
                 isMultiple={isNomalLiveMultiple}
                 onClick={() => handleNomalLiveMultiple('2x')}
                 position="0px"
@@ -188,9 +223,12 @@ const Theater = () => {
             </S.CountWrapper>
           </S.ResultInputWrapper>
           <S.ResultInputWrapper>
-            <div>이벤트 라이브 횟수</div>
+            <S.Title>이벤트 라이브 횟수</S.Title>
             <S.CountWrapper>
               <S.Input
+                baseColor="#afa690"
+                darkColor="#94886b"
+                lightColor="#d0cbbe"
                 readOnly
                 type="text"
                 value={`${
@@ -202,6 +240,8 @@ const Theater = () => {
                 }회`}
               />
               <S.nonMultipleBtn
+                baseColor="#afa690"
+                darkColor="#94886b"
                 isMultiple={isEventLiveMultiple}
                 onClick={() => handleEventLiveMultiple('1x')}
                 position="70px"
@@ -209,34 +249,70 @@ const Theater = () => {
                 1x
               </S.nonMultipleBtn>
               <S.DoubleBtn
+                baseColor="#afa690"
+                darkColor="#94886b"
                 isMultiple={isEventLiveMultiple}
                 onClick={() => handleEventLiveMultiple('2x')}
                 position="35px"
               >
                 2x
               </S.DoubleBtn>
-              <S.QuadBtn isMultiple={isEventLiveMultiple} onClick={() => handleEventLiveMultiple('4x')} position="0px">
+              <S.QuadBtn
+                baseColor="#afa690"
+                darkColor="#94886b"
+                isMultiple={isEventLiveMultiple}
+                onClick={() => handleEventLiveMultiple('4x')}
+                position="0px"
+              >
                 4x
               </S.QuadBtn>
             </S.CountWrapper>
           </S.ResultInputWrapper>
           <S.ResultInputWrapper>
-            <div>최종 이벤트 포인트</div>
-            <S.Input readOnly type="text" value={`${resultPt}Pt`} />
+            <S.Title>최종 이벤트 포인트</S.Title>
+            <S.Input
+              baseColor="#afa690"
+              darkColor="#94886b"
+              lightColor="#d0cbbe"
+              readOnly
+              type="text"
+              value={`${resultPt}Pt`}
+            />
           </S.ResultInputWrapper>
         </S.ResultSection>
         <S.ResultSection>
           <S.ResultInputWrapper>
-            <div>사용한 스테미너</div>
-            <S.Input readOnly type="text" value={nomalLiveCount * 30} />
+            <S.Title>사용한 스테미너</S.Title>
+            <S.Input
+              baseColor="#afa690"
+              darkColor="#94886b"
+              lightColor="#d0cbbe"
+              readOnly
+              type="text"
+              value={nomalLiveCount * 30}
+            />
           </S.ResultInputWrapper>
           <S.ResultInputWrapper>
-            <div>사용한 재화</div>
-            <S.Input readOnly type="text" value={`${eventLiveCount * 180}개`} />
+            <S.Title>사용한 이벤트 재화</S.Title>
+            <S.Input
+              baseColor="#afa690"
+              darkColor="#94886b"
+              lightColor="#d0cbbe"
+              readOnly
+              type="text"
+              value={`${eventLiveCount * 180}개`}
+            />
           </S.ResultInputWrapper>
           <S.ResultInputWrapper>
-            <div>사용한 쥬얼 개수</div>
-            <S.Input readOnly type="text" value={`${usedJewel}개`} />
+            <S.Title>사용한 쥬얼 개수</S.Title>
+            <S.Input
+              baseColor="#afa690"
+              darkColor="#94886b"
+              lightColor="#d0cbbe"
+              readOnly
+              type="text"
+              value={`${usedJewel}개`}
+            />
           </S.ResultInputWrapper>
         </S.ResultSection>
       </S.ResultWrapper>
